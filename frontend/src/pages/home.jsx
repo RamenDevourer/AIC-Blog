@@ -21,31 +21,14 @@ function Home() {
                     // setList((l) => [...l, blog.blog]);
                 });
             } catch (error) {
-                console.log(error);
+                console.log(error, "try block error");
             }
         }
 
         fetchData();
     }, []);
 
-    console.log(list);
 
-    const handleLogin = async () => {
-        await axios
-        .post(`http://localhost:5555/auth/login`, {"username" : username, "password" : password})
-        .then((res) => {
-            setInvalid(false);
-            // navigate('/create');
-            console.log(res);
-            var token = res.data.accessToken;
-            localStorage.setItem('accessToken', token);
-
-        })
-        .catch((error) => {
-            setInvalid(true);
-            console.log(error.message);
-        })
-    };
 
     function limitString(text, wordLimit, charLimit) {
         return text.trim().split(/\s+/).slice(0, wordLimit).join(' ').slice(0, charLimit) + (text.length > charLimit || text.split(/\s+/).length > wordLimit ? '...' : '');
@@ -56,9 +39,11 @@ function Home() {
         <Navbar />
         <div className='container'>
           <div className='row'>
+          {list.length > 0 ? (
+        <>
             <div className='col1'>
               <div className='card'>
-                <div className='title'>{limitString(list[1].title, 20, 100)}</div>
+                <div className='title'>{limitString(list[0].title, 20, 100)}</div>
                 <hr />
                 <div className='content'>{limitString(list[1].content, 30, 200)}</div>
               </div>
@@ -70,7 +55,7 @@ function Home() {
             </div>
             <div className='col2'>
             <div className='card'>
-                <div className='title'>{limitString(list[1].title, 20, 100)}</div>
+                <div className='title'>{limitString(list[0].title, 20, 100)}</div>
                 <hr />
                 <div className='content'>{limitString(list[0].content, 80, 500)}</div>
               </div>
@@ -87,6 +72,10 @@ function Home() {
                 <div className='content'>{limitString(list[4].content, 30, 200)}</div>
               </div>
             </div>
+            </>
+      ) : (
+        <div>Loading...</div>
+      )}
           </div>
         </div>
       </>
