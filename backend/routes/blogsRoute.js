@@ -52,6 +52,18 @@ router.get('/',async (req, res) => {
     }
 });
 
+router.get('/:id',async (req, res) => {
+    try {
+        const { id } = req.params;
+        const blog = await Blogs.findOne( {"_id" : id});
+
+        return res.status(200).json(blog);
+    }catch {
+        console.log(error.message);
+        return res.status(500).send({message : error.message});
+    }
+});
+
 router.put('/movedown/:username/:index', async (req, res) => {
     try {
         const { username, index} = req.params;

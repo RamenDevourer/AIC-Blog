@@ -1,4 +1,10 @@
 
+body{
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
 .container{
   margin: 0 10vw;
 }
@@ -42,3 +48,10 @@
   padding: 20px 25px;
   cursor: pointer;
 }
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+

@@ -29,7 +29,9 @@
 }
 
 .card{
+    margin: 25px;
     margin-bottom: 30px;
+    
 }
 
 .title{
@@ -50,4 +52,13 @@
 .col2 .content{
     font-size: 2rem;
     font-weight: 300;
+}
+
+
+.title:hover {
+    color: hsl(0, 0%, 40%);
+}
+
+.content:hover {
+    color: hsl(0, 0%, 40%);
 }

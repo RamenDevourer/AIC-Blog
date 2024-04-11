@@ -1,7 +1,7 @@
 import React, {useState,useEffect,useRef} from 'react'
 import axios from 'axios'
 import {Routes, Route, redirect} from 'react-router-dom'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
 import Navbar from './navbar.jsx'
 import './home.css'
 
@@ -42,35 +42,40 @@ function Home() {
           {list.length > 0 ? (
         <>
             <div className='col1'>
+            <Link className='link' to={`/blog/${list[1]._id}`}>
               <div className='card'>
-                <div className='title'>{limitString(list[0].title, 20, 100)}</div>
+                <div className='title'>{limitString(list[1].title, 20, 100)}</div>
                 <hr />
                 <div className='content'>{limitString(list[1].content, 30, 200)}</div>
-              </div>
+              </div></Link>
+              <Link className='link' to={`/blog/${list[2]._id}`}>
               <div className='card'>
                 <div className='title'>{limitString(list[2].title, 20, 100)}</div>
                 <hr />
                 <div className='content'>{limitString(list[2].content, 30, 200)}</div>
-              </div>
+              </div></Link>
             </div>
             <div className='col2'>
-            <div className='card'>
+            <Link className='link' to={`/blog/${list[0]._id}`}>
+              <div className='card'>
                 <div className='title'>{limitString(list[0].title, 20, 100)}</div>
                 <hr />
-                <div className='content'>{limitString(list[0].content, 80, 500)}</div>
-              </div>
+                <div className='content'>{limitString(list[0].content, 70, 400)}</div>
+              </div></Link>
             </div>
             <div className='col3'>
-            <div className='card'>
+            <Link className='link' to={`/blog/${list[3]._id}`}>
+              <div className='card'>
                 <div className='title'>{limitString(list[3].title, 20, 100)}</div>
                 <hr />
                 <div className='content'>{limitString(list[3].content, 30, 200)}</div>
-              </div>
+              </div></Link>
+              <Link className='link' to={`/blog/${list[4]._id}`}>
               <div className='card'>
                 <div className='title'>{limitString(list[4].title, 20, 100)}</div>
                 <hr />
                 <div className='content'>{limitString(list[4].content, 30, 200)}</div>
-              </div>
+              </div></Link>
             </div>
             </>
       ) : (
