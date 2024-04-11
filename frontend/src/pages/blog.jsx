@@ -7,7 +7,7 @@ import './blog.css'
 
 
 function Blog() {
-    const [blog, setBlog] = useState([]);
+    const [blog, setBlog] = useState("loading");
     const [mongoList, setMongoList] = useState([]);
     const navigate = useNavigate();
     let { id } = useParams();
@@ -43,7 +43,7 @@ function Blog() {
         <Navbar />
         <div className='container'>
           <div className='row'>
-          {blog != undefined || blog != [] ? (
+          {(blog != "loading" && blog != undefined) ? (
         <>
             <div className='container'>
                 
