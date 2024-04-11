@@ -3,6 +3,7 @@ import axios from 'axios'
 import {Routes, Route, redirect} from 'react-router-dom'
 import { useNavigate,Link } from 'react-router-dom';
 import Navbar from './navbar.jsx'
+import Card from './card.jsx'
 import './home.css'
 
 
@@ -17,7 +18,7 @@ function Home() {
                 const res = await axios.get(`http://localhost:5555/blog/`);
                 setMongoList(res.data.data);
                 res.data.data.forEach((blog) => {
-                    setList((l) => [...l, {title: blog.title, _id: blog._id, content: blog.content}]);
+                    setList((l) => [...l, {title: blog.title, _id: blog._id, content: blog.content, tag: blog.tag, date: blog.createdAt}]);
                     // setList((l) => [...l, blog.blog]);
                 });
             } catch (error) {
@@ -30,10 +31,21 @@ function Home() {
 
 
 
-    function limitString(text, wordLimit, charLimit) {
-        return text.trim().split(/\s+/).slice(0, wordLimit).join(' ').slice(0, charLimit) + (text.length > charLimit || text.split(/\s+/).length > wordLimit ? '...' : '');
-    }
+    
   
+    // function formatDate(i) {  
+    //   const blogDate = new Date(list[i].date);
+    //   const day = blogDate.getDate().toString().padStart(2, '0');
+    //   const month = (blogDate.getMonth() + 1).toString().padStart(2, '0');
+    //   const year = blogDate.getFullYear().toString().slice(-2);
+    //   const formattedDate = `${day}.${month}.${year}`;
+    //   return formattedDate;
+    // }
+
+    function limitString(text, wordLimit, charLimit) {
+      return text.trim().split(/\s+/).slice(0, wordLimit).join(' ').slice(0, charLimit) + (text.length > charLimit || text.split(/\s+/).length > wordLimit ? '...' : '');
+  }
+
     return (
       <>
         <Navbar />
@@ -42,40 +54,20 @@ function Home() {
           {list.length > 0 ? (
         <>
             <div className='col1'>
-            <Link className='link' to={`/blog/${list[1]._id}`}>
-              <div className='card'>
-                <div className='title'>{limitString(list[1].title, 20, 100)}</div>
-                <hr />
-                <div className='content'>{limitString(list[1].content, 30, 200)}</div>
-              </div></Link>
-              <Link className='link' to={`/blog/${list[2]._id}`}>
-              <div className='card'>
-                <div className='title'>{limitString(list[2].title, 20, 100)}</div>
-                <hr />
-                <div className='content'>{limitString(list[2].content, 30, 200)}</div>
-              </div></Link>
+              <Card blog={list[2]} title={{words: 20, letters: 100}} content={{words: 30, letters: 200}}/>
+              <Card blog={list[4]} title={{words: 20, letters: 100}} content={{words: 30, letters: 200}}/>
+              <Card blog={list[6]} title={{words: 20, letters: 100}} content={{words: 30, letters: 200}}/>
+              <Card blog={list[8]} title={{words: 20, letters: 100}} content={{words: 30, letters: 200}}/>
             </div>
             <div className='col2'>
-            <Link className='link' to={`/blog/${list[0]._id}`}>
-              <div className='card'>
-                <div className='title'>{limitString(list[0].title, 20, 100)}</div>
-                <hr />
-                <div className='content'>{limitString(list[0].content, 70, 400)}</div>
-              </div></Link>
+            <Card blog={list[0]} title={{words: 20, letters: 100}} content={{words: 80, letters: 500}}/>
+            <Card blog={list[1]} title={{words: 20, letters: 100}} content={{words: 80, letters: 500}}/>
             </div>
             <div className='col3'>
-            <Link className='link' to={`/blog/${list[3]._id}`}>
-              <div className='card'>
-                <div className='title'>{limitString(list[3].title, 20, 100)}</div>
-                <hr />
-                <div className='content'>{limitString(list[3].content, 30, 200)}</div>
-              </div></Link>
-              <Link className='link' to={`/blog/${list[4]._id}`}>
-              <div className='card'>
-                <div className='title'>{limitString(list[4].title, 20, 100)}</div>
-                <hr />
-                <div className='content'>{limitString(list[4].content, 30, 200)}</div>
-              </div></Link>
+              <Card blog={list[3]} title={{words: 20, letters: 100}} content={{words: 30, letters: 200}}/>
+              <Card blog={list[5]} title={{words: 20, letters: 100}} content={{words: 30, letters: 200}}/>
+              <Card blog={list[7]} title={{words: 20, letters: 100}} content={{words: 30, letters: 200}}/>
+              <Card blog={list[9]} title={{words: 20, letters: 100}} content={{words: 30, letters: 200}}/>
             </div>
             </>
       ) : (

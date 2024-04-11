@@ -62,3 +62,14 @@
 .content:hover {
     color: hsl(0, 0%, 40%);
 }
+
+.tag{
+    border: 1.4px solid;
+    margin: 15px 0;
+    padding: 2px 3px;
+    width: fit-content;
+}
+
+.tag:hover {
+    color: hsl(0, 0%, 40%);
+}

@@ -40,7 +40,7 @@ router.delete ('/:id', async (req, res) => {
 
 router.get('/',async (req, res) => {
     try {
-        const blogs = await Blogs.find().sort({ "createdAt": -1 }).limit(5);
+        const blogs = await Blogs.find().sort({ "createdAt": -1 }).limit(10);
 
         return res.status(200).json({
             length : blogs.length,
