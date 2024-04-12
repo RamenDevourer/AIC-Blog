@@ -46,7 +46,7 @@ router.get('/',async (req, res) => {
             length : blogs.length,
             data: blogs
         });
-    }catch {
+    }catch(error) {
         console.log(error.message);
         return res.status(500).send({message : error.message});
     }
@@ -58,7 +58,7 @@ router.get('/:id',async (req, res) => {
         const blog = await Blogs.findOne( {"_id" : id});
 
         return res.status(200).json(blog);
-    }catch {
+    }catch(error) {
         console.log(error.message);
         return res.status(500).send({message : error.message});
     }

@@ -11,7 +11,7 @@ router.post('/login', async(req, res) => {
     const user = await users.findOne({"username" : username , "password" : password});
     console.log(user);
     if (!user) {
-        return res.status(401).json({ message: 'Invalid username or password' });
+        return res.status(401).send({ message: 'Invalid username or password' });
     }
 
     const payload = {
@@ -23,6 +23,30 @@ router.post('/login', async(req, res) => {
     // const refreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET);
     // res.json({ accessToken: accessToken, refreshToken: refreshToken });
     res.json({ accessToken: accessToken});
+})
+
+router.post('/register', async(req, res) => {
+    
+    try {
+        if (!req.body.username || !req.body.password){
+            return res.status(500).send({message: `send all required feilds` })
+        }
+        const { username, password } = req.body;
+        const existingUser = await users.findOne({ username: username });
+        if (existingUser) {
+            return res.status(400).json({ message: 'Username already exists' });
+        }
+
+        const newUser = {
+            username: username,
+            password: password
+        };
+        const user = await users.create(newUser);
+        return res.status(201).send(user);
+    } catch (error){
+        console.log(error.message);
+        return res.status(500).send({message: error.message});
+    }
 })
 
 router.post('/token', async (req, res) => {

@@ -1,23 +1,24 @@
 import React, {useState,useEffect,useRef} from 'react'
 import axios from 'axios'
 import {Routes, Route, redirect} from 'react-router-dom'
-import { useNavigate,Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Navbar from './navbar.jsx'
 import './login.css'
 
 
-function Login() {
+function Register() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [invalid, setInvalid] = useState('');
     const navigate = useNavigate();
 
-    const handleLogin = async () => {
+    const handleRegister = async () => {
         await axios
-        .post(`http://localhost:5555/auth/login`, {"username" : username, "password" : password})
+        .post(`http://localhost:5555/auth/register`, {"username" : username, "password" : password})
         .then((res) => {
             setInvalid('');
             // navigate('/create');
+            navigate('/login');
             console.log(res);
             var token = res.data.accessToken;
             localStorage.setItem('accessToken', token);
@@ -57,7 +58,7 @@ function Login() {
       <Navbar />
       <div className='container login-container'>
         <div className='login-card'>
-          <span className='login-title'>Login</span>
+          <span className='login-title'>Register</span>
           <input
             type="text"
             placeholder="Enter username"
@@ -71,16 +72,16 @@ function Login() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button onClick={handleLogin}>Login</button>
+          <button onClick={handleRegister}>Register</button>
           <span className='invalid'>{invalid}</span>
           {/* <button onClick={handleProtec}>Protec</button> */}
           <hr/>
-          <span className='login-text'>Don't have an account?</span>
-          <Link to='/register'><button className='register'>Register</button></Link>
+          <span className='login-text'>Already have an account?</span>
+          <button className='register'>Login</button>
           </div>
       </div>
       </>
     );
 }
 
-export default Login;
+export default Register;
