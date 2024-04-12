@@ -17,7 +17,7 @@ function Login() {
         .post(`http://localhost:5555/auth/login`, {"username" : username, "password" : password})
         .then((res) => {
             setInvalid('');
-            // navigate('/create');
+            navigate('/dashboard');
             console.log(res);
             var token = res.data.accessToken;
             localStorage.setItem('accessToken', token);

@@ -1,7 +1,7 @@
 import React, {useState,useEffect,useRef} from 'react'
 import axios from 'axios'
 import {Routes, Route, redirect} from 'react-router-dom'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
 import Navbar from './navbar.jsx'
 import './login.css'
 
@@ -77,7 +77,7 @@ function Register() {
           {/* <button onClick={handleProtec}>Protec</button> */}
           <hr/>
           <span className='login-text'>Already have an account?</span>
-          <button className='register'>Login</button>
+          <Link to='/login'><button className='register'>Login</button></Link>
           </div>
       </div>
       </>

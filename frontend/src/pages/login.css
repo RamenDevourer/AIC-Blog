@@ -39,6 +39,12 @@ button{
     width: 100%;
 }
 
+button:hover{
+    color: hsl(0, 0%, 40%);
+    border: hsl(0, 0%, 40%);
+    border: 2px solid;
+}
+
 .pass{
     margin-bottom: 20px;
 }
@@ -68,4 +74,31 @@ hr{
 
 Link{
     width: 100%;
+}
+
+.dashboard-card{
+    width: 30rem;
+}
+
+.dashboard-button{
+    text-align: center;
+}
+
+.logout{
+    color: hsl(0, 100%, 65%);
+}
+
+.dashboard-title{
+    font-size: 3rem;
+    padding: 10px 0 0 10px;
+}
+
+.logout-button{
+    border: none;
+    padding: 0;
+    padding-bottom: 10px;
+}
+
+.logout-button:hover{
+    border: none;
 }

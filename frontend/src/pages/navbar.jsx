@@ -13,7 +13,7 @@ function Navbar() {
         <div className='navbar'>
           <Link to='/'><img className='logo' src='/src/assets/muse_memor.jpeg' ></img></Link>
           <Link to='/'><div className='navbar-title'>MuseMemoir</div></Link>
-          <Link to='/login'><span class="material-symbols-outlined">person_2</span></Link>
+          <Link to='/dashboard'><span class="material-symbols-outlined">person_2</span></Link>
         </div>
       </div>
       </>

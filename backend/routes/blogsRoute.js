@@ -1,6 +1,6 @@
 import express from 'express';
 import {Blogs} from '../models/blogs.js';
-
+import {users} from '../models/users.js';
 
 const router = express.Router();
 
@@ -58,6 +58,18 @@ router.get('/:id',async (req, res) => {
         const blog = await Blogs.findOne( {"_id" : id});
 
         return res.status(200).json(blog);
+    }catch(error) {
+        console.log(error.message);
+        return res.status(500).send({message : error.message});
+    }
+});
+
+router.get('/username',async (req, res) => {
+    try {
+        const { username } = req.body.id;
+        const user = await users.findOne( {"_id" : id});
+
+        return res.status(200).json(user);
     }catch(error) {
         console.log(error.message);
         return res.status(500).send({message : error.message});
