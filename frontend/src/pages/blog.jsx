@@ -42,11 +42,10 @@ function Blog() {
       <>
         <Navbar />
         <div className='container'>
-          <div className='row'>
+          <div className='row blog-row'>
           {(blog != "loading" && blog != undefined) ? (
         <>
-            <div className='container'>
-                
+            <div className='container blog-container'>
                 <div className='blog-title'>
                     {blog.title}
                 </div>

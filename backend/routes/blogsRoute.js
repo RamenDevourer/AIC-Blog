@@ -1,11 +1,12 @@
 import express from 'express';
+import jwt from 'jsonwebtoken';
 import {Blogs} from '../models/blogs.js';
 import {users} from '../models/users.js';
 
 const router = express.Router();
 
 
-router.post ('/', async (req, res) => {
+router.post ('/',authenticateToken , async (req, res) => {
     try {
         if (!req.body.title || !req.body.username || !req.body.content || !req.body.tag){
             return res.status(500).send({message: `send all required feilds` })
