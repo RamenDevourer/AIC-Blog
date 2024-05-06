@@ -5,7 +5,6 @@ import { useNavigate,useParams,Link } from 'react-router-dom';
 import Navbar from './navbar.jsx'
 import './login.css'
 
-
 function Dashboard() {
     const [loading, setLoading] = useState("loading");
     const [username, setUsername] = useState("loading");
@@ -59,7 +58,7 @@ function Dashboard() {
           <span className='login-title dashboard-title'>{username},</span>
           <hr/>
           <span className='login-title dashboard-button'><Link to='/create' >Create</Link></span>
-          <span className='login-title dashboard-button'>Update</span>
+          <span className='login-title dashboard-button'><Link to={`/update/${username}`} >Update</Link></span>
           <span className='login-title dashboard-button'>Delete</span>
           <button onClick={handleLogout} className='logout-button'><span className='login-title dashboard-button logout'>Logout</span></button>
           </div>

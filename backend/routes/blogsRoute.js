@@ -39,10 +39,25 @@ router.delete ('/:id', async (req, res) => {
     }
 });
 
-router.get('/',async (req, res) => {
+router.get('/' ,async (req, res) => {
     try {
-        const blogs = await Blogs.find().sort({ "createdAt": -1 }).limit(10);
+        const blogs = await Blogs.find().sort({ "createdAt": -1 }).limit(18);
 
+        return res.status(200).json({
+            length : blogs.length,
+            data: blogs
+        });
+    }catch(error) {
+        console.log(error.message);
+        return res.status(500).send({message : error.message});
+    }
+});
+
+router.get('/update/:username', async (req, res) => {
+    try {
+        const { username } = req.params;
+        const blogs = await Blogs.find({ "username": username }).sort({ "createdAt": -1 });
+        
         return res.status(200).json({
             length : blogs.length,
             data: blogs
@@ -74,6 +89,22 @@ router.get('/username',async (req, res) => {
     }catch(error) {
         console.log(error.message);
         return res.status(500).send({message : error.message});
+    }
+});
+
+router.put('/:id', authenticateToken, async (req, res) => {
+    try {
+        const id = req.params.id;
+
+        const Blog = await Blogs.findByIdAndUpdate(id, req.body, {new: true});
+
+        if (!Blog) {
+            return res.status(404).send({message: 'No blog found with the given id'});
+        }
+        return res.status(200).send(Blog);
+    } catch (error){
+        console.log(error.message);
+        return res.status(500).send({message: error.message});
     }
 });
 

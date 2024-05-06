@@ -1,26 +1,31 @@
 import React, {useState,useEffect,useRef} from 'react'
 import axios from 'axios'
 import {Routes, Route, redirect} from 'react-router-dom'
-import { useNavigate,Link } from 'react-router-dom';
+import { useNavigate,Link,useParams } from 'react-router-dom';
 import Navbar from './navbar.jsx'
-import Card from './card.jsx'
+import UpdateCard from './update_card.jsx'
 import './home.css'
 
 
-function Home() {
+function Update() {
     const [list, setList] = useState([]);
+    const [loading, setLoading] = useState("Loading...");
     const [mongoList, setMongoList] = useState([]);
     const navigate = useNavigate();
+    let { username } = useParams();
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.get(`http://localhost:5555/blog/`);
+                const res = await axios.get(`http://localhost:5555/blog/update/${username}`);
                 setMongoList(res.data.data);
                 res.data.data.forEach((blog) => {
                     setList((l) => [...l, {title: blog.title, _id: blog._id, content: blog.content, tag: blog.tag, date: blog.createdAt}]);
                     // setList((l) => [...l, blog.blog]);
                 });
+                if (res.data.length == 0){
+                  setLoading("Please post a blog first!");
+                }
             } catch (error) {
                 console.log(error, "try block error");
             }
@@ -28,9 +33,6 @@ function Home() {
 
         fetchData();
     }, []);
-
-
-
     
   
     // function formatDate(i) {  
@@ -54,24 +56,23 @@ function Home() {
           {list.length > 0 ? (
         <>
             <div className='col1'>
-              {list.slice(4, 11).map((item, index) => (
-                                <Card key={index} blog={item} title={{words: 20, letters: 100}} content={{words: 30, letters: 200}}/>
+            {list.slice(4, 11).map((item, index) => (
+                <UpdateCard key={index} blog={item} title={{ words: 20, letters: 100 }} content={{ words: 30, letters: 200 }} />
               ))}
             </div>
             <div className='col2'>
               {list.slice(0, 4).map((item, index) => (
-                                <Card key={index} blog={item} title={{words: 20, letters: 100}} content={{words: 80, letters: 500}}/>
+                <UpdateCard key={index} blog={item} title={{ words: 20, letters: 100 }} content={{ words: 80, letters: 500 }} />
               ))}
             </div>
             <div className='col3'>
-              {list.slice(11, 18).map((item, index) => (
-                                  <Card key={index} blog={item} title={{words: 20, letters: 100}} content={{words: 30, letters: 200}}/>
-                ))}
+            {list.slice(11, 18).map((item, index) => (
+                <UpdateCard key={index} blog={item} title={{ words: 20, letters: 100 }} content={{ words: 30, letters: 200 }} />
+              ))}
             </div>
-              
             </>
       ) : (
-        <div>Loading...</div>
+        <div>{loading}</div>
       )}
           </div>
         </div>
@@ -79,4 +80,4 @@ function Home() {
     );
 }
 
-export default Home;
+export default Update;
